@@ -37,6 +37,11 @@ type BoardState struct {
 	History [200]Irrev
 }
 
+func NewBoardState() *BoardState {
+	var BS BoardState
+	return &BS
+}
+
 type Type int
 
 const (
