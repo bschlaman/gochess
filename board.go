@@ -1,15 +1,58 @@
 package board
 
-import "fmt"
+type Side int
 
-func genLegalMoves(){
+const (
+	White = iota
+	Black
+)
+
+func (s Side) String() string {
+	return [...]string{"white", "black"}[s]
 }
 
-func makeMove(){
+type Move struct {
+	To    int
+	From  int
+	Flags int
 }
 
-func undoMove(){
+type Irrev struct {
+	move          Move
+	EnPasSq       int
+	CPerm         int
+	CapturedPiece int
+	Pinned        uint64
 }
 
-func eval(){
+type BoardState struct {
+	Board      [120]int
+	Ply        int
+	SideToMove bool
+	EnPasSq    int
+	// 0 0 0 0
+	CPerm   int
+	KingSq  [2]int
+	Pinned  uint64
+	History [200]Irrev
 }
+
+type Type int
+
+const (
+	Knight Type = iota
+	Bishop
+	Rook
+	Queen
+	King
+)
+
+const (
+	NORMAL_MODE = iota
+	FEN_MODE
+	PERFT_MODE
+	O_64_BOARD
+	O_BOARD_STATE
+	O_120_BOARD
+	O_PINNED
+)

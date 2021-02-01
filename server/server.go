@@ -52,7 +52,7 @@ func initHandlers() {
 	})
 	http.HandleFunc("/fen", func(w http.ResponseWriter, r *http.Request) {
 		logRequest(r)
-		cmd := exec.Command("ls")
+		cmd := exec.Command("../gochess")
 		var out bytes.Buffer
 		cmd.Stdout = &out
 		if err := cmd.Run(); err != nil {
