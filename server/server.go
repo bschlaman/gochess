@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"os/exec"
 	"time"
@@ -12,6 +13,8 @@ import (
 
 const (
 	port       string = ":5812"
+	cert       string = "certs/fullchain.pem"
+	key        string = "certs/privkey.pem"
 	name       string = "BREND-API"
 	logPath    string = "logs/output.log"
 	configPath string = "config.json"
@@ -52,13 +55,20 @@ func initHandlers() {
 	})
 	http.HandleFunc("/fen", func(w http.ResponseWriter, r *http.Request) {
 		logRequest(r)
-		cmd := exec.Command("../gochess")
+
+		m, _ := url.ParseQuery(r.URL.RawQuery)
+		infoLogger.Printf("inputFEN: %s", m["fen"][0])
+
+		cmd := exec.Command("/home/server/restapi/chess/move_generator/out", "-f", m["fen"][0])
 		var out bytes.Buffer
 		cmd.Stdout = &out
 		if err := cmd.Run(); err != nil {
 			errorLogger.Fatal(err)
 		}
-		infoLogger.Printf("cmd output: %s", out.String())
+
+		infoLogger.Printf("outputFEN: %s", out.String())
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		fmt.Fprintf(w, out.String())
 	})
 }
 
@@ -79,5 +89,5 @@ func main() {
 	initHandlers()
 	infoLogger.Println("handlers initialized")
 
-	errorLogger.Fatal(http.ListenAndServe(port, nil))
+	errorLogger.Fatal(http.ListenAndServeTLS(port, cert, key, nil))
 }
