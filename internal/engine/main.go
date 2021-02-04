@@ -1,11 +1,10 @@
-package main
+package engine
 
 import (
+	"board"
 	"flag"
 	"fmt"
 	"os"
-
-	"board"
 )
 
 const StartFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
@@ -30,6 +29,6 @@ func main() {
 	parseArgs()
 	fmt.Println("input", inputFEN)
 
-	bs := board.BoardState
+	bs := board.NewBoardState()
 	fmt.Println(bs)
 }
