@@ -1,7 +1,6 @@
-package engine
+package main
 
 import (
-	"board"
 	"flag"
 	"fmt"
 	"os"
@@ -29,6 +28,6 @@ func main() {
 	parseArgs()
 	fmt.Println("input", inputFEN)
 
-	bs := board.NewBoardState()
+	bs := NewBoardState()
 	fmt.Println(bs)
 }

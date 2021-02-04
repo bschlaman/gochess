@@ -1,4 +1,4 @@
-package config
+package main
 
 type Color string
 
