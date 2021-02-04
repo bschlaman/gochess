@@ -1,0 +1,2 @@
+ - A port of my chess engine in go!
+ - Note that this includes an API server to play against
