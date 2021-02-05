@@ -3,14 +3,14 @@ package main
 type Color string
 
 const (
-	ColorBlack  Color = "\u001b[30m"
-	ColorRed          = "\u001b[31m"
-	ColorGreen        = "\u001b[32m"
-	ColorYellow       = "\u001b[33m"
-	ColorBlue         = "\u001b[34m"
-	ColorReset        = "\u001b[0m"
+	BLK Color = "\u001b[30m"
+	RED       = "\u001b[31m"
+	GRN       = "\u001b[32m"
+	YEL       = "\u001b[33m"
+	BLU       = "\u001b[34m"
+	RES       = "\u001b[0m"
 )
 
 func colorize(color Color, msg string) string {
-	return string(color) + msg + string(ColorReset)
+	return string(color) + msg + string(RES)
 }

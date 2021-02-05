@@ -10,10 +10,6 @@ const StartFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
 var inputFEN string
 
-func printBoard() {
-	fmt.Println(" ---- Game Board ---- ")
-}
-
 func parseArgs() {
 	fen := flag.String("f", StartFEN, "fen notation of position")
 	flag.Parse()
@@ -23,11 +19,11 @@ func parseArgs() {
 }
 
 func main() {
-	printBoard()
 	fmt.Println("Chess!")
 	parseArgs()
 	fmt.Println("input", inputFEN)
 
 	bs := NewBoardState()
-	fmt.Println(bs)
+	bs.PrintBoard(O_64_BOARD)
+	bs.PrintBoard(O_BOARD_STATE)
 }
