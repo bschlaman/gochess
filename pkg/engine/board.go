@@ -75,8 +75,8 @@ func sq64To120(sq64 int) int {
 	return sq64 + 21 + 2*(sq64-sq64%8)/8
 }
 
-func getAlgebraic(sq int) string {
-	sq64 := sq120To64(sq)
+func getAlgebraic(sq120 int) string {
+	sq64 := sq120To64(sq120)
 	file := (sq64 % 8) + 'a'
 	rank := 1 + ((sq64 - sq64%8) / 8)
 	return string(rune(file)) + strconv.Itoa(rank)
